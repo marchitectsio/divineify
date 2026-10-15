@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A Video Message For You</title>
+<style>
+  body { margin:0; font-family:-apple-system, Georgia, serif; background:#f7f3ea; color:#1d2733; }
+  .wrap { max-width:520px; margin:0 auto; padding:0 0 48px; }
+  .band { background:#16283f; color:#fff; padding:22px 20px 18px; border-bottom:4px solid #c9a227; }
+  .band .church { font-size:13px; letter-spacing:2px; text-transform:uppercase; color:#c9a227; }
+  .band h1 { font-size:24px; font-weight:normal; margin:8px 0 2px; }
+  .band .from { font-size:14px; color:#d8dee6; }
+  .card { background:#fff; margin:18px 16px 0; border-radius:14px; overflow:hidden;
+          box-shadow:0 2px 14px rgba(22,40,63,.12); }
+  video { width:100%; display:block; background:#000; }
+  .msg { margin:16px 16px 0; background:#fff; border-radius:14px; padding:18px 20px;
+         box-shadow:0 2px 14px rgba(22,40,63,.08); font-size:16px; line-height:1.6; }
+  .rsvpwrap { margin:16px 16px 0; }
+  button { width:100%; font-size:17px; padding:15px; border:0; border-radius:10px;
+           background:#16283f; color:#fff; cursor:pointer; }
+  #done { text-align:center; color:#5a4a2f; margin:12px 16px 0; min-height:20px; font-size:15px; }
+  .foot { text-align:center; color:#8a7a55; font-size:12px; margin-top:22px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="band">
+    <div class="church" id="churchline">Grace Community Church</div>
+    <h1 id="headline">A message for you</h1>
+    <div class="from" id="fromline">From Pastor James</div>
+  </div>
+
+  <div class="card">
+    <video controls playsinline preload="metadata" poster="poster.jpg" src="pastor.mp4"></video>
+  </div>
+
+  <div class="msg" id="notetext"></div>
+
+  <div class="rsvpwrap">
+    <button id="rsvp" onclick="rsvp()">Join us for Thanksgiving service</button>
+  </div>
+  <p id="done"></p>
+
+  <p class="foot" id="footline"></p>
+</div>
+<script>
+  var q = new URLSearchParams(location.search);
+  var to = q.get('to') || 'Mary';
+  var from = q.get('from') || 'Pastor James';
+  var church = q.get('church') || 'Grace Community Church';
+  document.getElementById('headline').textContent = 'A message for you, ' + to;
+  document.getElementById('fromline').textContent = 'From ' + from;
+  document.getElementById('churchline').textContent = church;
+  document.getElementById('notetext').textContent = to + ', before the season gets busy, I wanted you to hear this from me directly. Thank you for being part of this family. I would love to see you at Thanksgiving service.';
+  document.getElementById('footline').textContent = church;
+  function rsvp() {
+    document.getElementById('rsvp').textContent = "✓ We'll save you a seat";
+    document.getElementById('done').textContent = 'Thank you, ' + to + '. We will see you at Thanksgiving service.';
+  }
+</script>
+</body>
+</html>
